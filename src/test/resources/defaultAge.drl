@@ -1,0 +1,7 @@
+rule "Set default age"
+dialect "mvel"
+when
+	person : org.drools.audit.model.Person(age == null)
+then
+	modify(person){age = 44}
+end

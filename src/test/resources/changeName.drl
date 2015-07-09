@@ -1,0 +1,8 @@
+rule "Overwrite name"
+  dialect "mvel"
+  ruleflow-group "change-name"
+  when
+    person : org.drools.audit.model.Person(firstName != "Sal")
+  then
+    modify(person){firstName = "Sal"}
+end

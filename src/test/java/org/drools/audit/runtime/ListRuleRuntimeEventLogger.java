@@ -1,4 +1,4 @@
-package org.drools.audit;
+package org.drools.audit.runtime;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

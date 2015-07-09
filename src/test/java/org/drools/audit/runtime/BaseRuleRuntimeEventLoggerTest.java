@@ -1,6 +1,7 @@
-package org.drools.audit;
+package org.drools.audit.runtime;
 
 
+import org.drools.audit.DroolsHelper;
 import org.drools.audit.model.Person;
 import org.drools.audit.runtime.RuntimeEventLog;
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class BaseRuleRuntimeEventLoggerTest {
 		sal.setAge(33);
 		kieSession.update(salHandle, sal);
 		
-		Assert.assertEquals("Not exactly one event was captured!",2, logger.getLogs().size());
+		Assert.assertEquals("Not exactly two events were  captured!",2, logger.getLogs().size());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_UPDATED, logger.getLogs().get(1).getType());
 	}
@@ -52,7 +53,7 @@ public class BaseRuleRuntimeEventLoggerTest {
 		sal.setAge(33);
 		kieSession.delete(salHandle);
 		
-		Assert.assertEquals("Not exactly one event was captured!",2, logger.getLogs().size());
+		Assert.assertEquals("Not exactly two events were  captured!",2, logger.getLogs().size());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_DELETED, logger.getLogs().get(1).getType());
 	}
@@ -69,7 +70,7 @@ public class BaseRuleRuntimeEventLoggerTest {
 		kieSession.update(salHandle, sal);
 		kieSession.delete(salHandle);
 		
-		Assert.assertEquals("Not exactly one event was captured!",3, logger.getLogs().size());
+		Assert.assertEquals("Not exactly three events were captured!",3, logger.getLogs().size());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_UPDATED, logger.getLogs().get(1).getType());
 		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_DELETED, logger.getLogs().get(2).getType());

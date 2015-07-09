@@ -15,16 +15,12 @@ import org.kie.api.runtime.rule.FactHandle;
 @Entity
 public class RuntimeEventLog {
 	
-	public static final int OBJECT_INSERTED = 0;
-	public static final int OBJECT_UPDATED = 1;
-	public static final int OBJECT_DELETED = 2;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	@Column
-	private int type;
+	private RuntimeEventLogType type;
 	
 	@Column
 	private Object fact;
@@ -35,27 +31,27 @@ public class RuntimeEventLog {
 	private Environment environment;
 	
 	public RuntimeEventLog(ObjectInsertedEvent event) {
-		this.type = OBJECT_INSERTED;
+		this.type = RuntimeEventLogType.OBJECT_INSERTED;
 		this.fact = event.getObject();
 		this.factHandle = event.getFactHandle();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 	
 	public RuntimeEventLog(ObjectUpdatedEvent event) {
-		this.type = OBJECT_UPDATED;
+		this.type = RuntimeEventLogType.OBJECT_UPDATED;
 		this.fact = event.getObject();
 		this.factHandle = event.getFactHandle();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 	
 	public RuntimeEventLog(ObjectDeletedEvent event) {
-		this.type = OBJECT_DELETED;
+		this.type = RuntimeEventLogType.OBJECT_DELETED;
 		this.fact = event.getOldObject();
 		this.factHandle = event.getFactHandle();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 	
-	public int getType() {
+	public RuntimeEventLogType getType() {
 		return type;
 	}
 	

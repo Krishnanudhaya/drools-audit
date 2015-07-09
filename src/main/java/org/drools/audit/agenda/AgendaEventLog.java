@@ -18,22 +18,12 @@ import org.kie.api.runtime.Environment;
 
 @Entity
 public class AgendaEventLog {
-
-	public static final int MATCH_CREATED = 0;
-	public static final int MATCH_CANCELLED = 1;
-	public static final int BEFORE_MATCH_FIRED = 2;
-	public static final int AFTER_MATCH_FIRED = 3;
-	public static final int AGENDA_GROUP_POPPED = 4;
-	public static final int AGENDA_GROUP_PUSHED = 5;
-	public static final int RULEFLOW_GROUP_ACTIVATED = 6;
-	public static final int RULEFLOW_GROUP_DEACTIVATED = 7;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
-	private int type;
+	private AgendaEventLogType type;
 	
 	@Column
 	private String name;
@@ -41,49 +31,49 @@ public class AgendaEventLog {
 	private Environment environment;
 
 	public AgendaEventLog(MatchCreatedEvent event) {
-		this.type = MATCH_CREATED;
+		this.type = AgendaEventLogType.MATCH_CREATED;
 		this.name = event.getMatch().getRule().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(MatchCancelledEvent event) {
-		this.type = MATCH_CANCELLED;
+		this.type = AgendaEventLogType.MATCH_CANCELLED;
 		this.name = event.getMatch().getRule().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(BeforeMatchFiredEvent event) {
-		this.type = BEFORE_MATCH_FIRED;
+		this.type = AgendaEventLogType.BEFORE_MATCH_FIRED;
 		this.name = event.getMatch().getRule().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(AfterMatchFiredEvent event) {
-		this.type = AFTER_MATCH_FIRED;
+		this.type = AgendaEventLogType.AFTER_MATCH_FIRED;
 		this.name = event.getMatch().getRule().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(AgendaGroupPoppedEvent event) {
-		this.type = AGENDA_GROUP_POPPED;
+		this.type = AgendaEventLogType.AGENDA_GROUP_POPPED;
 		this.name = event.getAgendaGroup().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(AgendaGroupPushedEvent event) {
-		this.type = AGENDA_GROUP_PUSHED;
+		this.type = AgendaEventLogType.AGENDA_GROUP_PUSHED;
 		this.name = event.getAgendaGroup().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(RuleFlowGroupActivatedEvent event) {
-		this.type = RULEFLOW_GROUP_ACTIVATED;
+		this.type = AgendaEventLogType.RULEFLOW_GROUP_ACTIVATED;
 		this.name = event.getRuleFlowGroup().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
 
 	public AgendaEventLog(RuleFlowGroupDeactivatedEvent event) {
-		this.type = RULEFLOW_GROUP_DEACTIVATED;
+		this.type = AgendaEventLogType.RULEFLOW_GROUP_DEACTIVATED;
 		this.name = event.getRuleFlowGroup().getName();
 		this.environment = event.getKieRuntime().getEnvironment();
 	}
@@ -96,7 +86,7 @@ public class AgendaEventLog {
 		this.id = id;
 	}
 
-	public int getType() {
+	public AgendaEventLogType getType() {
 		return this.type;
 	}
 

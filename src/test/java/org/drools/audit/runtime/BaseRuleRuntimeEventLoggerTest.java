@@ -22,7 +22,7 @@ public class BaseRuleRuntimeEventLoggerTest {
 		
 		Assert.assertEquals("Not exactly one event was captured!",1, logger.getLogs().size());
 		RuntimeEventLog log = logger.getLogs().get(0);
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, log.getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_INSERTED, log.getType());
 		Assert.assertEquals("Wrong fact in event", sal, log.getFact());
 	}
 	
@@ -38,8 +38,8 @@ public class BaseRuleRuntimeEventLoggerTest {
 		kieSession.update(salHandle, sal);
 		
 		Assert.assertEquals("Not exactly two events were  captured!",2, logger.getLogs().size());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_UPDATED, logger.getLogs().get(1).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_INSERTED, logger.getLogs().get(0).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_UPDATED, logger.getLogs().get(1).getType());
 	}
 	
 	@Test
@@ -54,8 +54,8 @@ public class BaseRuleRuntimeEventLoggerTest {
 		kieSession.delete(salHandle);
 		
 		Assert.assertEquals("Not exactly two events were  captured!",2, logger.getLogs().size());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_DELETED, logger.getLogs().get(1).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_INSERTED, logger.getLogs().get(0).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_DELETED, logger.getLogs().get(1).getType());
 	}
 	
 	@Test
@@ -71,8 +71,8 @@ public class BaseRuleRuntimeEventLoggerTest {
 		kieSession.delete(salHandle);
 		
 		Assert.assertEquals("Not exactly three events were captured!",3, logger.getLogs().size());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_INSERTED, logger.getLogs().get(0).getType());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_UPDATED, logger.getLogs().get(1).getType());
-		Assert.assertEquals("Wrong type of event" ,RuntimeEventLog.OBJECT_DELETED, logger.getLogs().get(2).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_INSERTED, logger.getLogs().get(0).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_UPDATED, logger.getLogs().get(1).getType());
+		Assert.assertEquals("Wrong type of event" ,RuntimeEventLogType.OBJECT_DELETED, logger.getLogs().get(2).getType());
 	}
 }
